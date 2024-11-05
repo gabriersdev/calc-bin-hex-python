@@ -28,18 +28,12 @@ def decToBin(nDec):
 
 def hexToDec(nHex):
   tCorrespond = {'A': 10, 'B': 11, 'C': 12, 'D': 13, 'E': 14, 'F': 15}
-  aHex = list(str(nHex).upper())
+  aHex = str(nHex).upper()
   somatoria = 0
-  for i in range(len(aHex)):
-    # Verifica se tem letras no nHex e se tiver, substituí
-    if aHex[i] in tCorrespond.keys():
-      aHex[i] = tCorrespond.get(aHex[i])
-    else:
-      # Se não tiver, já converte para inteiro
-      aHex[i] = int(aHex[i])
-    # E calcula:
-    somatoria += aHex[i] * (16 ** (len(aHex) - 1 - i))
-    return somatoria
+  for i, char in enumerate(aHex): # Usar enumerate para obter índice e valor
+    val = tCorrespond.get(char, char)  # Obter valor da tabela ou manter o próprio char se não for letra
+    somatoria += int(val) * (16 ** (len(aHex) - 1 - i)) # Converter para int somente no cálculo
+  return somatoria
 
 def decToHex(nDec):
   return hex(nDec)[2:].upper()
